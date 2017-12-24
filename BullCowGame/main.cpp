@@ -35,6 +35,7 @@ void PlayGame()
 	for (int i = 0; i < NUMBER_OF_TURNS; i++)
 	{
 		string Guess = GetGuess();
+		// Print the guess
 		cout << "Your guess is: " << Guess << endl;
 		cout << endl;
 	}
