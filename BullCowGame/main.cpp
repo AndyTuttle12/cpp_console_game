@@ -6,14 +6,19 @@ using namespace std;
 void PrintIntro();
 void PlayGame();
 string GetGuess();
+bool AskToPlayAgain();
 
 void PrintGuess(std::string &Guess);
 
 // the entry point for the application
 int main()
 {
-	PrintIntro();
-	PlayGame();
+	bool bPlayAgain = false;
+	do {
+		PrintIntro();
+		PlayGame();
+		bPlayAgain = AskToPlayAgain();
+	} while (bPlayAgain == true);
 	return 0; // exit the application
 }
 
@@ -48,4 +53,13 @@ string GetGuess()
 	string Guess = "";
 	getline(cin, Guess);
 	return Guess;
+}
+
+bool AskToPlayAgain()
+{
+	cout << "Do you want to play again (y/n)? ";
+	string Response = "";
+	getline(cin, Response);
+	cout << endl;
+	return ((Response[0] == 'y') || (Response[0] == 'Y'));
 }
