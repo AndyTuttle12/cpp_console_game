@@ -1,14 +1,15 @@
 #include <iostream>
 #include <string>
-
-using namespace std;
+#include "FBullCowGame.h"
 
 void PrintIntro();
 void PlayGame();
-string GetGuess();
+std::string GetGuess();
 bool AskToPlayAgain();
 
 void PrintGuess(std::string &Guess);
+
+FBullCowGame BCGame; // instantiate a new game
 
 // the entry point for the application
 int main()
@@ -26,40 +27,47 @@ int main()
 void PrintIntro()
 {
 	constexpr int WORD_LENGTH = 5;
-	cout << "Welcome to Bulls and Cows, a fun word game.\n";
-	cout << "Can you guess the " << WORD_LENGTH;
-	cout << " letter isogram I'm thinking of?\n";
-	cout << endl;
+	std::cout << "Welcome to Bulls and Cows, a fun word game.\n";
+	std::cout << "Can you guess the " << WORD_LENGTH;
+	std::cout << " letter isogram I'm thinking of?\n";
+	std::cout << std::endl;
 	return;
 }
 
 void PlayGame()
 {
+	BCGame.Reset();
+	int MaxTries = BCGame.GetMaxTries();
+
 	// loop for the number of turns asking for guesses
-	constexpr int NUMBER_OF_TURNS = 5;
-	for (int i = 0; i < NUMBER_OF_TURNS; i++)
+	// TODO change from for to while once validating tries
+	for (int i = 0; i < MaxTries; i++)
 	{
-		string Guess = GetGuess();
-		// Print the guess
-		cout << "Your guess is: " << Guess << endl;
-		cout << endl;
+		std::string Guess = GetGuess(); // TODO check for valid guesses
+		// submit valid guess to the game
+		// print number of bulls and cows
+		std::cout << "Your guess is: " << Guess << std::endl;
+		std::cout << std::endl;
 	}
+
+	// TODO summarize game
 }
 
-string GetGuess()
+std::string GetGuess()
 {
+	int CurrentTry = BCGame.GetCurrentTry();
 	// get a guess from the player
-	cout << "Make your guess here: ";
-	string Guess = "";
-	getline(cin, Guess);
+	std::cout << "Try " << CurrentTry << ": Make your guess here: ";
+	std::string Guess = "";
+	std::getline(std::cin, Guess);
 	return Guess;
 }
 
 bool AskToPlayAgain()
 {
-	cout << "Do you want to play again (y/n)? ";
-	string Response = "";
-	getline(cin, Response);
-	cout << endl;
+	std::cout << "Do you want to play again (y/n)? ";
+	std::string Response = "";
+	std::getline(std::cin, Response);
+	std::cout << std::endl;
 	return ((Response[0] == 'y') || (Response[0] == 'Y'));
 }
