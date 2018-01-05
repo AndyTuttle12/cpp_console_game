@@ -12,6 +12,7 @@ using int32 = int;
 
 void PrintIntro();
 void PlayGame();
+void PrintGameSummary();
 FText GetValidGuess();
 bool AskToPlayAgain();
 
@@ -57,7 +58,20 @@ void PlayGame()
 		std::cout << " Cows: " << BullCowCount.Cows << "\n\n";
 	}
 
-	// TODO summarize game
+	PrintGameSummary();
+	return;
+}
+
+void PrintGameSummary()
+{
+	if (BCGame.IsGameWon()) {
+		std::cout << "Congratulations! You Won!\n";
+	}
+	else
+	{
+		std::cout << "Sorry! Better luck next time!\n";
+	}
+	return;
 }
 
 // loop continually until the user gives a valid guess
