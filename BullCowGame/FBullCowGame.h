@@ -1,10 +1,14 @@
+/* The game logic (no views or direct user interaction).
+The game is a basic 'Guess the Word' game.
+*/
+
 #pragma once
 #include <string>
 
+// // to make syntax more like Unreal Engine 4
 using FString = std::string;
 using int32 = int;
 
-// all values initialized to zero
 struct FBullCowCount
 {
 	int32 Bulls = 0;
@@ -31,15 +35,15 @@ public:
 	bool IsGameWon() const;
 	EGuessStatus CheckGuessValidity(FString) const;
 
-	void Reset(); // TODO make a rich return value
+	void Reset();
 	FBullCowCount SubmitValidGuess(FString);
 
 // Mostly look at the public methods above ^^
 private:
 	// see constructor for initializations
 	int32 MyCurrentTry;
-	int32 MyMaxTries;
 	FString MyHiddenWord;
 	bool bGameIsWon;
 	bool IsIsogram(FString) const;
+	bool IsLowercase(FString) const;
 };
